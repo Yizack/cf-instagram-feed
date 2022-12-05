@@ -13,7 +13,9 @@
     "sourceType": "module"
   },
   "globals": {
-    "Response": "readonly"
+    "Response": "readonly",
+    "Request": "readonly",
+    "caches": "readonly"
   },
   "plugins": [],
   "rules": {
