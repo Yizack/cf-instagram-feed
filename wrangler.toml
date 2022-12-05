@@ -1,0 +1,12 @@
+name = "cf-instagram-feed"
+main = "src/index.js"
+compatibility_date = "2022-12-04"
+usage_model = "bundled"
+env = { }
+
+[triggers]
+crons = [ ]
+
+# [secrets]
+# ACCESS_TOKEN
+# DOMAIN (root domain with http protocol and without trailing slash)
