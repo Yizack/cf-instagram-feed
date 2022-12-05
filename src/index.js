@@ -25,7 +25,7 @@ async function handleRequest(req, ctx, API) {
     return response;
   }
 
-  //API.refreshAccessToken();
+  API.refreshAccessToken();
   const { data } = await API.getFeed();
   response = new JsonResponse({data});
   if (data) {
