@@ -25,11 +25,13 @@ async function handleRequest(req, ctx, API) {
     return response;
   }
 
-  API.refreshAccessToken();
+  //API.refreshAccessToken();
   const { data } = await API.getFeed();
   response = new JsonResponse({data});
-  console.log("Stored in cache!");
-  ctx.waitUntil(cache.put(cacheKey, response.clone()));
+  if (data) {
+    console.log("Stored in cache!");
+    ctx.waitUntil(cache.put(cacheKey, response.clone()));
+  }
   return response;
 }
 
