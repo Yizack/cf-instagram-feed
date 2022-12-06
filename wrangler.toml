@@ -9,4 +9,3 @@ crons = [ ]
 
 # [secrets]
 # ACCESS_TOKEN
-# DOMAIN (root domain with http protocol and without trailing slash)
