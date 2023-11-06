@@ -17,7 +17,7 @@ class JsonResponse extends Response {
   }
 }
 
-router.get("/", async (req, ctx, API, cacheManager) => {
+router.get("/", async (req, { ctx, API, cacheManager }) => {
   const { cache, cacheKey } = cacheManager;
   const { data } = await API.getFeed();
   let response = new JsonResponse({data});
@@ -45,6 +45,6 @@ export default {
 
     const API = new InstagramFeed(env.ACCESS_TOKEN); 
     await API.refreshAccessToken();   
-    return router.handle(req, ctx, API, cacheManager);
+    return router.handle(req, { ctx, API, cacheManager, env });
   }
 };

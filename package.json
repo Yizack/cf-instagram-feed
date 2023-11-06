@@ -5,13 +5,13 @@
   "private": true,
   "scripts": {
     "start": "wrangler dev",
-    "deploy": "wrangler publish"
+    "deploy": "wrangler deploy"
   },
   "devDependencies": {
-    "eslint": "^8.29.0",
-    "wrangler": "2.5.0"
+    "eslint": "^8.53.0",
+    "wrangler": "3.15.0"
   },
   "dependencies": {
-    "itty-router": "^2.6.6"
+    "itty-router": "^4.0.23"
   }
 }
