@@ -1,10 +1,10 @@
-import { Router } from "itty-router";
-import InstagramFeed from "./InstagramFeed.js";
+import { IttyRouter } from "itty-router";
+import InstagramFeed from "./InstagramFeed";
 
-const router = Router();
+const router = IttyRouter();
 
 class JsonResponse extends Response {
-  constructor(body) {
+  constructor (body: Record<string, any>) {
     const jsonBody = JSON.stringify(body);
     const options = {
       headers: {
@@ -17,12 +17,12 @@ class JsonResponse extends Response {
   }
 }
 
-router.get("/", async (req, { ctx, API, cacheManager }) => {
+router.get("/", async (req, { ctx, API, cacheManager }: RouterContext) => {
   const { cache, cacheKey } = cacheManager;
-  const { data } = await API.getFeed();
-  let response = new JsonResponse({data});
+  const data = await API.getFeed();
+  let response = new JsonResponse({ data });
   if (data) {
-    console.log("Stored in cache!");
+    console.info("Stored in cache!");
     ctx.waitUntil(cache.put(cacheKey, response.clone()));
   }
   return response;
@@ -31,7 +31,7 @@ router.get("/", async (req, { ctx, API, cacheManager }) => {
 router.all("*", () => new Response("Not Found.", { status: 404 }));
 
 export default {
-  async fetch(req, env, ctx) {
+  async fetch (req, env, ctx) {
     const cacheUrl = new URL(req.url);
     const cacheKey = new Request(cacheUrl.toString(), req);
     const cache = caches.default;
@@ -39,12 +39,12 @@ export default {
     const response = await cache.match(cacheKey);
 
     if (response) {
-      console.log("Found in cache!");
+      console.info("Found in cache!");
       return response;
     }
 
-    const API = new InstagramFeed(env.ACCESS_TOKEN); 
-    await API.refreshAccessToken();   
-    return router.handle(req, { ctx, API, cacheManager, env });
+    const API = new InstagramFeed(env.ACCESS_TOKEN);
+    await API.refreshAccessToken();
+    return router.fetch(req, { ctx, API, cacheManager });
   }
-};
+} satisfies FetchHandler;

@@ -1,7 +1,6 @@
 name = "cf-instagram-feed"
-main = "src/index.js"
-compatibility_date = "2022-12-04"
-usage_model = "bundled"
+main = "dist/index.js"
+compatibility_date = "2024-07-12"
 env = { }
 
 [triggers]
