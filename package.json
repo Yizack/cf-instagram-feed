@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "worker:dev": "tsc && wrangler dev",
-    "worker:deploy": "tsc && wrangler deploy",
+    "dev": "tsc && wrangler dev",
+    "worker": "tsc && wrangler deploy",
     "lint": "pnpm lint:eslint --fix",
     "lint:eslint": "eslint"
   },
