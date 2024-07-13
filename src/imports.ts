@@ -29,6 +29,6 @@ export const defineCachedEventHandler = (
       console.info("Stored in cache!");
       event.context.cloudflare.context.waitUntil(cache.put(cacheKey, outputResponse.clone()));
     }
-    return output;
+    return outputResponse;
   });
 };
