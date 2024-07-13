@@ -1,10 +1,9 @@
-import type { H3Event } from "h3";
-import { defineCachedEventHandler } from "../imports";
-import InstagramFeed from "../InstagramFeed";
-
-export default defineCachedEventHandler(async (event: H3Event) => {
-  const API = new InstagramFeed(event.context.cloudflare.env.ACCESS_TOKEN);
+export default defineCachedEventHandler(async (event) => {
+  const { accessToken } = useRuntimeConfig(event);
+  const API = new InstagramFeed(accessToken);
   await API.refreshAccessToken();
   const data = await API.getFeed();
+
+  setResponseHeader(event, "Access-Control-Allow-Origin", "*");
   return { data };
 }, { maxAge: 86400 });
