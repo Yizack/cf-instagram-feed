@@ -1,13 +1,23 @@
-import type { CacheStorage as CloudflareCacheStorage, ExecutionContext, RequestInfo } from "@cloudflare/workers-types";
-import type InstagramFeed from "../src/InstagramFeed";
+import type { CfProperties, ExecutionContext, R2Bucket, D1Database } from "@cloudflare/workers-types";
 
 export {};
 
+declare module "h3" {
+  interface H3EventContext {
+    cf: CfProperties;
+    cloudflare: {
+      request: Request;
+      env: {
+        ACCESS_TOKEN: string;
+      };
+      context: ExecutionContext;
+    };
+  }
+}
+
 declare global {
 
-  interface Env {
-    ACCESS_TOKEN: string;
-  }
+  type Env = Record<string, string | undefined>;
 
   interface CacheStorage extends CloudflareCacheStorage {
     default: Cache;
@@ -18,6 +28,4 @@ declare global {
   interface FetchHandler {
     fetch?: ExportedHandlerFetchHandler;
   }
-
-  type RouterContext = { ctx: ExecutionContext, API: InstagramFeed, cacheManager: { cache: Cache, cacheKey: Request } };
 }
