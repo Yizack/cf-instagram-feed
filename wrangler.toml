@@ -14,4 +14,4 @@ bucket = ".output/public"
 crons = [ ]
 
 # [secrets]
-# ACCESS_TOKEN
+# NITRO_ACCESS_TOKEN

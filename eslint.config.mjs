@@ -19,7 +19,7 @@ export default [
       parser: parserTs
     },
     rules: {
-      "camelcase": "off",
+      "camelcase": ["error"],
       "no-console": ["error", { allow: ["info", "warn"] }],
       "@stylistic/indent": ["error", 2, { SwitchCase: 1 }],
       "@stylistic/linebreak-style": ["error", process.platform === "win32" ? "windows" : "unix"],
@@ -47,7 +47,8 @@ export default [
       "@stylistic/one-component-per-file": "off",
       "@stylistic/require-default-prop": "off",
       "@stylistic/space-in-parens": ["error", "never"],
-      "@stylistic/template-curly-spacing": "error"
+      "@stylistic/template-curly-spacing": "error",
+      "@stylistic/quote-props": ["error", "consistent-as-needed"]
     }
   }
 ];

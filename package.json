@@ -1,8 +1,9 @@
 {
+  "private": true,
   "name": "cf-instagram-feed",
   "description": "Javascript example to retrieve an Instagram profile feed using Cloudflare Workers and Instagram Basic Display API. Refresh token if cookie expired.",
   "version": "1.0.0",
-  "private": true,
+  "type": "module",
   "scripts": {
     "build": "nitro build",
     "build:worker": "NITRO_PRESET=cloudflare_module npm run build",
